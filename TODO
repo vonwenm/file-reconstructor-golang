@@ -1,0 +1,7 @@
+Make examples work
+
+Support for seeking (I think it can work from stdin, but our code is not there yet)
+
+There's no reason we have to use all the copies, if the first couple look good.
+Check, say, the first 10 copies and use the data if you have 100% confidence,
+otherwise add more.
