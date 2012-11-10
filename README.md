@@ -43,7 +43,7 @@ production.
 Here's a simple example which uses a program to simulate the addition of bit
 errors to a stream:
 
-    % echo "fizzbuzz" | file\_reconstructor | add\_bit\_errors 0.01 | xxd
+    % echo "fizzbuzz" | file_reconstructor | add_bit_errors 0.01 | xxd
 
 After add\_bit\_errors, we have the following data (length header omitted):
 
@@ -55,7 +55,7 @@ After add\_bit\_errors, we have the following data (length header omitted):
 
 Now, let's add a decoder:
 
-    % echo "fizzbuzz" | file\_reconstructor | add\_bit\_errors 0.01 | file\_reconstructor -d | xxd
+    % echo "fizzbuzz" | file_reconstructor | add_bit_errors 0.01 | file_reconstructor -d | xxd
 
 Despite the bit errors, the data is decoded correctly:
 
@@ -63,7 +63,7 @@ Despite the bit errors, the data is decoded correctly:
 
 To test it with your own files, you can do something like this:
 
-    % cat MYFILE | file\_reconstructor | add\_bit\_errors 0.25 | file\_reconstructor -d > NEWFILE
+    % cat MYFILE | file_reconstructor | add_bit_errors 0.25 | file_reconstructor -d > NEWFILE
     % diff MYFILE NEWFILE
 
 The files should be identical, unless you added too many bit errors for your
@@ -81,11 +81,11 @@ metadata or the partition table.
 
 You copy the output to a block device like this:
 
-    % file\_reconstructor < mydata > /dev/sdc
+    % file_reconstructor < mydata > /dev/sdc
 
 If you want, you can use a tool like pv to monitor progress:
 
-    % file\_reconstructor < mydata | pv > /dev/sdc
+    % file_reconstructor < mydata | pv > /dev/sdc
 
 This is only really useful with fast and large media, otherwise the write cache
 will fill and pv will have nothing to report.
