@@ -43,28 +43,28 @@ production.
 Here's a simple example which uses a program to simulate the addition of bit
 errors to a stream:
 
-> % echo "fizzbuzz" | file\_reconstructor | add\_bit\_errors 0.01 | xxd
+    % echo "fizzbuzz" | file\_reconstructor | add\_bit\_errors 0.01 | xxd
 
 After add\_bit\_errors, we have the following data (length header omitted):
 
-> 0000000: 6669 7e7a 6275 7a7a 6669 7a5a 6275 7a7a  fi~zbuzzfizZbuzz
-> 0000010: 6669 7a7a 6275 7a7a 6669 7a7a 6275 7a7a  fizzbuzzfizzbuzz
-> 0000020: 6669 7a6a 6275 7a7a 6669 7a7a 6675 7a7a  fizjbuzzfizzfuzz
-> 0000030: 4669 7a7a 6275 7a7a 2669 787a 6275 7a7a  Fizzbuzz&ixzbuzz
-> 0000040: 6669 7a7a 6275 7a7a 6669 7a7a 6a75 7a7a  fizzbuzzfizzjuzz
+    0000000: 6669 7e7a 6275 7a7a 6669 7a5a 6275 7a7a  fi~zbuzzfizZbuzz
+    0000010: 6669 7a7a 6275 7a7a 6669 7a7a 6275 7a7a  fizzbuzzfizzbuzz
+    0000020: 6669 7a6a 6275 7a7a 6669 7a7a 6675 7a7a  fizjbuzzfizzfuzz
+    0000030: 4669 7a7a 6275 7a7a 2669 787a 6275 7a7a  Fizzbuzz&ixzbuzz
+    0000040: 6669 7a7a 6275 7a7a 6669 7a7a 6a75 7a7a  fizzbuzzfizzjuzz
 
 Now, let's add a decoder:
 
-> % echo "fizzbuzz" | file\_reconstructor | add\_bit\_errors 0.01 | file\_reconstructor -d | xxd
+    % echo "fizzbuzz" | file\_reconstructor | add\_bit\_errors 0.01 | file\_reconstructor -d | xxd
 
 Despite the bit errors, the data is decoded correctly:
 
-> 0000000: 6669 7a7a 6275 7a7a                      fizzbuzz
+    0000000: 6669 7a7a 6275 7a7a                      fizzbuzz
 
 To test it with your own files, you can do something like this:
 
-% cat MYFILE | file\_reconstructor | add\_bit\_errors 0.25 | file\_reconstructor -d > NEWFILE
-% diff MYFILE NEWFILE
+    % cat MYFILE | file\_reconstructor | add\_bit\_errors 0.25 | file\_reconstructor -d > NEWFILE
+    % diff MYFILE NEWFILE
 
 The files should be identical, unless you added too many bit errors for your
 level of redundancy, in which case you'll see some errors in the output.
@@ -81,11 +81,11 @@ metadata or the partition table.
 
 You copy the output to a block device like this:
 
-> % file\_reconstructor < mydata > /dev/sdc
+    % file\_reconstructor < mydata > /dev/sdc
 
 If you want, you can use a tool like pv to monitor progress:
 
-> % file\_reconstructor < mydata | pv > /dev/sdc
+    % file\_reconstructor < mydata | pv > /dev/sdc
 
 This is only really useful with fast and large media, otherwise the write cache
 will fill and pv will have nothing to report.
